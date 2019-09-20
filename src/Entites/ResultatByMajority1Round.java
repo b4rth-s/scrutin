@@ -2,13 +2,13 @@ package Entites;
 
 import java.util.List;
 
-public class ResultatScrutin1 extends Resultat {
+public class ResultatByMajority1Round extends Resultat {
 			//Scrutin1 et ResultatScrutin1 sont des classes très importantes qui implémentent de nombreuses fonctions qui seront par la suite utilisées dans les autres Scrutins et ResultatsScrutins.
     //ATTRIBUT(S)
 
 	
     //CONSTRUCTEUR(S)
-    public ResultatScrutin1(Candidat[] listeDeCandidats, List<Integer> listeDeResultats) {	//Ainsi, on choisi ici de renvoyer les résultats avec une liste ordonnée de voix.
+    public ResultatByMajority1Round(Candidat[] listeDeCandidats, List<Integer> listeDeResultats) {	//Ainsi, on choisi ici de renvoyer les résultats avec une liste ordonnée de voix.
     	this.setListeDeCandidats(listeDeCandidats);
     	this.setListeDeResultats(listeDeResultats);
     }

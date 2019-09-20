@@ -66,25 +66,25 @@ public class Election {
 
     	Situation situation1 = new Situation(new Contrainte(10000, 6));
     	
-    	Election election1 = new Election(situation1, new Scrutin1());		//Le premier test consiste à regarder les résultats d'élections ayant la même situation mais des scrutins différents.
+    	Election election1 = new Election(situation1, new ByMajority1Round());		//Le premier test consiste à regarder les résultats d'élections ayant la même situation mais des scrutins différents.
     					//On affiche les résultats de tous les tours pour vérifier que le logiciel fonctionne.
-    	System.out.println("Le gagnant de ce " + election1.getScrutin() + " est : " + election1.getResultat().getGagnant());
-    	System.out.println("\nLe candidat1 obtient " + election1.getResultat().getListeDeResultats().get(0) + " voix.");
-    	System.out.println("Le candidat2 obtient " + election1.getResultat().getListeDeResultats().get(1) + " voix.");
-    	System.out.println("Le candidat3 obtient " + election1.getResultat().getListeDeResultats().get(2) + " voix.");
-    	System.out.println("Le candidat4 obtient " + election1.getResultat().getListeDeResultats().get(3) + " voix.");
-    	System.out.println("Le candidat5 obtient " + election1.getResultat().getListeDeResultats().get(4) + " voix.");
-    	System.out.println("Le candidat5 obtient " + election1.getResultat().getListeDeResultats().get(5) + " voix.\n");
+    	System.out.println("The winner of this " + election1.getScrutin() + " is: " + election1.getResultat().getGagnant());
+    	System.out.println("\nCandidate 1 gets " + election1.getResultat().getListeDeResultats().get(0) + " voices.");
+    	System.out.println("Candidate 2 gets " + election1.getResultat().getListeDeResultats().get(1) + " voices.");
+    	System.out.println("Candidate 3 gets " + election1.getResultat().getListeDeResultats().get(2) + " voices.");
+    	System.out.println("Candidate 4 gets " + election1.getResultat().getListeDeResultats().get(3) + " voices.");
+    	System.out.println("Candidate 5 gets " + election1.getResultat().getListeDeResultats().get(4) + " voices.");
+    	System.out.println("Candidate 6 gets " + election1.getResultat().getListeDeResultats().get(5) + " voices.\n");
     	
-    	System.out.println("Test de imprimeResultat");
+    	System.out.println("Testing imprimeResultat");
     	for (int i=0; i<5; i++) {
-    		System.out.println("La fonction imprimeResutat("+i+") donne : " + election1.getResultat().imprimeResultat(i));
+    		System.out.println("Function imprimeResutat("+i+") returns : " + election1.getResultat().imprimeResultat(i));
     	}
     	
-    	System.out.println("\nLe bonheur du corps électoral sur cette élection est : " + new PremiereFonctionDeSatisfaction().calculBonheur(election1));
+    	System.out.println("\nThe hapiness of the voters in this election is : " + new AverageGap().calculBonheur(election1));
     	
     	    	
-    	Election election2 = new Election(situation1, new Scrutin2());
+    	Election election2 = new Election(situation1, new ByMajority2Rounds());
     	
     	System.out.println("\n\n\nLe gagnant de ce " + election2.getScrutin() + " est : " + election2.getResultat().getGagnant());
     	System.out.println("\nAu premier tour, le candidat1 obtient " + ((List<?>) election2.getResultat().getListeDeResultats().get(0)).get(0) + " voix.");
@@ -93,7 +93,7 @@ public class Election {
     	System.out.println("Au premier tour, le candidat4 obtient " + ((List<?>) election2.getResultat().getListeDeResultats().get(3)).get(0) + " voix.");
     	System.out.println("Au premier tour, le candidat5 obtient " + ((List<?>) election2.getResultat().getListeDeResultats().get(4)).get(0) + " voix.");
     	System.out.println("Au premier tour, le candidat6 obtient " + ((List<?>) election2.getResultat().getListeDeResultats().get(5)).get(0) + " voix.");
-    	System.out.println("\nLes candidats sélectionnés pour le second tour sont " + election1.getResultat().getGagnant() + " et " + ((ResultatScrutin1) election1.getResultat()).getSecond());
+    	System.out.println("\nLes candidats sélectionnés pour le second tour sont " + election1.getResultat().getGagnant() + " et " + ((ResultatByMajority1Round) election1.getResultat()).getSecond());
     	System.out.println("\nAu second tour, le candidat1 obtient " + ((List<?>) election2.getResultat().getListeDeResultats().get(0)).get(1) + " voix.");
     	System.out.println("Au second tour, le candidat2 obtient " + ((List<?>) election2.getResultat().getListeDeResultats().get(1)).get(1) + " voix.");
     	System.out.println("Au second tour, le candidat3 obtient " + ((List<?>) election2.getResultat().getListeDeResultats().get(2)).get(1) + " voix.");
@@ -106,10 +106,10 @@ public class Election {
     		System.out.println("La fonction imprimeResutat("+i+") donne : " + election2.getResultat().imprimeResultat(i));
     	}
     	
-    	System.out.println("\nLe bonheur du corps électoral sur cette élection est : " + new PremiereFonctionDeSatisfaction().calculBonheur(election2));
+    	System.out.println("\nLe bonheur du corps électoral sur cette élection est : " + new AverageGap().calculBonheur(election2));
     	
     	
-    	Election election3 = new Election(situation1, new Scrutin3());
+    	Election election3 = new Election(situation1, new ByElimination());
     	System.out.println("\n\n\nLe gagnant de ce " + election3.getScrutin() + " est : " + election3.getResultat().getGagnant());
     	System.out.println("\nAu premier tour, le candidat1 obtient " + ((List<?>) election3.getResultat().getListeDeResultats().get(0)).get(0) + " voix.");
     	System.out.println("Au premier tour, le candidat2 obtient " + ((List<?>) election3.getResultat().getListeDeResultats().get(1)).get(0) + " voix.");
@@ -147,15 +147,15 @@ public class Election {
     		System.out.println("La fonction imprimeResutat("+i+") donne : " + election3.getResultat().imprimeResultat(i));
     	}
 
-    	System.out.println("\nLe bonheur du corps électoral sur cette élection est : " + new PremiereFonctionDeSatisfaction().calculBonheur(election3));
+    	System.out.println("\nLe bonheur du corps électoral sur cette élection est : " + new AverageGap().calculBonheur(election3));
     	
 		float bonheurScrutin1 = 0, bonheurScrutin2 = 0, bonheurScrutin3 = 0;
 				//Ce test correspond plus à l'utilité du logiciel : on calcule le bonheur moyen généré par chaque scrutin sur 100 élections.
     	for (int i=0; i<100; i++) {
     		Situation situation = new Situation(new Contrainte(100000, 10));
-    		bonheurScrutin1 += new PremiereFonctionDeSatisfaction().calculBonheur(new Election(situation, new Scrutin1()));
-    		bonheurScrutin2 += new PremiereFonctionDeSatisfaction().calculBonheur(new Election(situation, new Scrutin2()));
-    		bonheurScrutin3 += new PremiereFonctionDeSatisfaction().calculBonheur(new Election(situation, new Scrutin3()));
+    		bonheurScrutin1 += new AverageGap().calculBonheur(new Election(situation, new ByMajority1Round()));
+    		bonheurScrutin2 += new AverageGap().calculBonheur(new Election(situation, new ByMajority2Rounds()));
+    		bonheurScrutin3 += new AverageGap().calculBonheur(new Election(situation, new ByElimination()));
     	}
     	System.out.println("\n\nLe bonheur moyen pour 100 situations de 100000 électeurs du scrutin 1 est : " + (bonheurScrutin1 / 100));
     	System.out.println("Le bonheur moyen pour 100 situations de 100000 électeurs du scrutin 2 est : " + (bonheurScrutin2 / 100));

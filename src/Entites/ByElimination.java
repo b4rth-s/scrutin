@@ -3,14 +3,14 @@ package Entites;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Scrutin3 extends Scrutin {
+public class ByElimination extends Scrutin {
 			//On voit dans la fonction mettreEnOeuvre que l'on a besoin de mettreEnOeuvre un Scrutin1 pour simuler 1 tour.
 	//ATTRIBUT(S)
 	
 	
 	//CONSTRUCTEUR(S)
-	public Scrutin3() {
-		this.setNom("Scrutin par élimination");
+	public ByElimination() {
+		this.setNom("Election by elimination");
 	}
 	
 	
@@ -27,7 +27,7 @@ public class Scrutin3 extends Scrutin {
 		}
 		
 		for (int i=0; i<listeDeCandidats.length-1; i++) {
-			ResultatScrutin1 resultatDuTour = (ResultatScrutin1) new Scrutin1().mettreEnOeuvre(new Situation(listeDeCandidatsClonee, situation.getCorpsElectoral()));
+			ResultatByMajority1Round resultatDuTour = (ResultatByMajority1Round) new ByMajority1Round().mettreEnOeuvre(new Situation(listeDeCandidatsClonee, situation.getCorpsElectoral()));
 			
 			for (int j=0; j<listeDeCandidats.length; j++) {
 				listeDeResultats.get(j).add((Integer) resultatDuTour.getListeDeResultats().get(j));
@@ -42,7 +42,7 @@ public class Scrutin3 extends Scrutin {
 			}
 		}
 		
-		return new ResultatScrutin3(listeDeCandidats, listeDeResultats);
+		return new ResultatByElimination(listeDeCandidats, listeDeResultats);
 		
 	}
 	

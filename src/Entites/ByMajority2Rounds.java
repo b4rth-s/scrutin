@@ -3,14 +3,14 @@ package Entites;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Scrutin2 extends Scrutin {
+public class ByMajority2Rounds extends Scrutin {
     		//On voit dans la fonction mettreEnOeuvre que l'on a besoin de mettreEnOeuvre un Scrutin1 pour simuler 1 tour.
 	//ATTRIBUT(S)
 	
 	
 	//CONSTRUCTEUR(S)
-	public Scrutin2() {
-		this.setNom("Scrutin majoritaire à 2 tours");
+	public ByMajority2Rounds() {
+		this.setNom("Election by elimination with 2 rounds");
 	}
 	
 	
@@ -24,7 +24,7 @@ public class Scrutin2 extends Scrutin {
 		List<List<Integer>> listeDeResultatsNonNormalises = new ArrayList<>();
 		
 		if (listeDeCandidats.length <= 2) {
-			Scrutin scrutinEquivalent = new Scrutin1();
+			Scrutin scrutinEquivalent = new ByMajority1Round();
 			Resultat resultatEquivalent = scrutinEquivalent.mettreEnOeuvre(situation);
 			
 			for (int i=0; i<listeDeCandidats.length; i++) {
@@ -39,8 +39,8 @@ public class Scrutin2 extends Scrutin {
 				listeDeResultatsNonNormalises.add(listeDeResultatsCandidat);
 			}
 		} else {
-			Scrutin scrutinEquivalentPremierTour = new Scrutin1();
-			ResultatScrutin1 resultatEquivalentPremierTour = (ResultatScrutin1) scrutinEquivalentPremierTour.mettreEnOeuvre(situation);
+			Scrutin scrutinEquivalentPremierTour = new ByMajority1Round();
+			ResultatByMajority1Round resultatEquivalentPremierTour = (ResultatByMajority1Round) scrutinEquivalentPremierTour.mettreEnOeuvre(situation);
 			
 			Candidat[] listeDeCandidatsToujoursEnLice = new Candidat[listeDeCandidats.length];
 			Candidat premier = resultatEquivalentPremierTour.getGagnant();
@@ -53,8 +53,8 @@ public class Scrutin2 extends Scrutin {
 				}
 			}
 			
-			Scrutin scrutinEquivalentSecondTour = new Scrutin1();
-			ResultatScrutin1 resultatEquivalentSecondTour = (ResultatScrutin1) scrutinEquivalentSecondTour.mettreEnOeuvre(new Situation(listeDeCandidatsToujoursEnLice, corpsElectoral));
+			Scrutin scrutinEquivalentSecondTour = new ByMajority1Round();
+			ResultatByMajority1Round resultatEquivalentSecondTour = (ResultatByMajority1Round) scrutinEquivalentSecondTour.mettreEnOeuvre(new Situation(listeDeCandidatsToujoursEnLice, corpsElectoral));
 			
 			
 			for (int i=0; i<listeDeCandidats.length; i++) {
@@ -65,7 +65,7 @@ public class Scrutin2 extends Scrutin {
 			}
 		}
 		
-		return new ResultatScrutin2(listeDeCandidats, listeDeResultatsNonNormalises);
+		return new ResultatByMajority2Rounds(listeDeCandidats, listeDeResultatsNonNormalises);
 	}
 	
 	

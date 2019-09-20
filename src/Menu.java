@@ -33,11 +33,11 @@ import Entites.Contrainte;
 import Entites.Electeur;
 import Entites.Election;
 import Entites.FonctionSatisfaction;
-import Entites.PremiereFonctionDeSatisfaction;
+import Entites.AverageGap;
 import Entites.Scrutin;
-import Entites.Scrutin1;
-import Entites.Scrutin2;
-import Entites.Scrutin3;
+import Entites.ByMajority1Round;
+import Entites.ByMajority2Rounds;
+import Entites.ByElimination;
 import Entites.Situation;
 import IHM.GenerateurSituation;
 
@@ -46,7 +46,7 @@ public class Menu extends JFrame implements ActionListener, ListSelectionListene
 
 	// ATTRIBUTS
 	private List<File> situations;
-	private FonctionSatisfaction fonctionSatisfaction = new PremiereFonctionDeSatisfaction();
+	private FonctionSatisfaction fonctionSatisfaction = new AverageGap();
 	private JComboBox<FonctionSatisfaction> fonctionSelect;
 	private JList<Scrutin> scrutinsSelect;
 	private JButton choixFichier, genererFichier, lancer;
@@ -57,9 +57,9 @@ public class Menu extends JFrame implements ActionListener, ListSelectionListene
 	private static Scrutin[] scrutinsDisponibles = new Scrutin[3];
 
 	{
-		scrutinsDisponibles[0] = new Scrutin1();
-		scrutinsDisponibles[1] = new Scrutin2();
-		scrutinsDisponibles[2] = new Scrutin3();
+		scrutinsDisponibles[0] = new ByMajority1Round();
+		scrutinsDisponibles[1] = new ByMajority2Rounds();
+		scrutinsDisponibles[2] = new ByElimination();
 	}
 
 	// CONSTRUCTEURS
@@ -67,16 +67,16 @@ public class Menu extends JFrame implements ActionListener, ListSelectionListene
 	public Menu() {
 		super();
 		// Initialisation des attributs
-		choixFichier = new JButton("Choisir un fichier");
-		genererFichier = new JButton("Créer nouveau fichier");
-		lancer = new JButton("Lancer la simulation");
-		lblSatisfaction = new JLabel("Fonction de satisfaction :");
+		choixFichier = new JButton("Choose a file");
+		genererFichier = new JButton("Create a new file");
+		lancer = new JButton("Launch simulation");
+		lblSatisfaction = new JLabel("Satisfaction function:");
 		lblSatisfaction.setHorizontalAlignment(JLabel.CENTER);
 		lblSatisfaction.setVerticalAlignment(JLabel.CENTER);
-		lblScrutins = new JLabel("Scrutins étudiés");
+		lblScrutins = new JLabel("Studied scrutins");
 		lblScrutins.setHorizontalAlignment(JLabel.CENTER);
 		lblScrutins.setVerticalAlignment(JLabel.CENTER);
-		lblSituations = new JLabel("Situations à simuler :");
+		lblSituations = new JLabel("Situations to simulate:");
 		lblSituations.setHorizontalAlignment(JLabel.CENTER);
 		lblSituations.setVerticalAlignment(JLabel.CENTER);
 		panel1 = new JPanel();
@@ -86,7 +86,7 @@ public class Menu extends JFrame implements ActionListener, ListSelectionListene
 		texteArea = new JTextArea();
 		scrollPane = new JScrollPane(texteArea);
 		fonctionSelect = new JComboBox<FonctionSatisfaction>();
-		fonctionSelect.addItem(new PremiereFonctionDeSatisfaction());
+		fonctionSelect.addItem(new AverageGap());
 		scrutinsSelect = new JList<Scrutin>(scrutinsDisponibles);
 		scrutinsSelect.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
@@ -143,22 +143,22 @@ public class Menu extends JFrame implements ActionListener, ListSelectionListene
 		String name = f.getName().replace(".stn", "");
 		while (Sc.hasNextLine()) {
 			String str = Sc.next();
-			if (str.compareTo("Nom") == 0) {
+			if (str.compareTo("Name") == 0) {
 				Sc.nextLine();
 				name = Sc.nextLine();
 			}
 
-			if (str.compareTo("Nombre de votants") == 0) {
+			if (str.compareTo("Number of voters") == 0) {
 				Sc.nextLine();
 				nbVotants = Integer.parseInt(Sc.nextLine());
 				listeElecteur = new Electeur[nbVotants];
 			}
-			if (str.compareTo("Nombre de candidats") == 0) {
+			if (str.compareTo("Number of candidates") == 0) {
 				Sc.nextLine();
 				nbCandidats = Integer.parseInt(Sc.nextLine());
 				listeCandidats = new Candidat[nbCandidats];
 			}
-			if (str.compareTo("Noms des candidats") == 0) {
+			if (str.compareTo("Candidates' names") == 0) {
 				Sc.nextLine();
 				Sc.useDelimiter(";");
 				nomsCandidats = new String[nbCandidats];
@@ -170,7 +170,7 @@ public class Menu extends JFrame implements ActionListener, ListSelectionListene
 				Sc.useDelimiter("#");
 				Sc.nextLine();
 			}
-			if (str.compareTo("CHOIX") == 0) {
+			if (str.compareTo("RANKINGS") == 0) {
 				Sc.nextLine();
 				Sc.useDelimiter(";");
 				for (int i = 0; i < nbVotants; i++) {
@@ -191,13 +191,13 @@ public class Menu extends JFrame implements ActionListener, ListSelectionListene
 	}
 
 	private File ecrire_resultat(Situation s) {
-		String str = findName(s.getName(),"Resultats",".rslt");
+		String str = findName(s.getName(),"Results",".rslt");
 		try {
 			FileWriter fw = new FileWriter("Resultats/"+str);
-			fw.write("##RESULTATS SUR##" + "\n" + s.getName() + "\n\n" + "CARACTERISTIQUE" + "\n\n"
-					+ "##Nombre de candidats##" + "\n" + s.getListeDeCandidats().length + "\n\n"
-					+ "##Nombre de votants##" + "\n" + s.getCorpsElectoral().length + "\n\n"
-					+ "##Fichier de la situation##" + "\n" + s.getAdresse() + "\n\n" + "##Fonction de satisfaction##"
+			fw.write("##RESULTS ON##" + "\n" + s.getName() + "\n\n" + "CARACTERISTICS" + "\n\n"
+					+ "##Number of candidates##" + "\n" + s.getListeDeCandidats().length + "\n\n"
+					+ "##Number of voters##" + "\n" + s.getCorpsElectoral().length + "\n\n"
+					+ "##Situation file##" + "\n" + s.getAdresse() + "\n\n" + "##Satisfaction function##"
 					+ "\n" + fonctionSatisfaction.toString() + "\n\n" + "##Scrutins##" + "\n");
 			@SuppressWarnings("deprecation")
 			Object[] scrutins = scrutinsSelect.getSelectedValues();
@@ -207,7 +207,7 @@ public class Menu extends JFrame implements ActionListener, ListSelectionListene
 				elections[i] = new Election(s, (Scrutin) scrutins[i]);
 				fw.write(scrutins[i].toString() + ";" + fonctionSatisfaction.calculBonheur(elections[i]) + "\n");
 			}
-			fw.write("\n##Resultats##\n");
+			fw.write("\n##Results##\n");
 			for (int i = 0; i < n; i++) {
 				Scrutin scrutin = (Scrutin) scrutins[i];
 				fw.write("**" + scrutin.toString() + "**\n");
@@ -216,7 +216,7 @@ public class Menu extends JFrame implements ActionListener, ListSelectionListene
 					fw.write(e.getResultat().imprimeResultat(j) + "\n");
 				}
 			}
-			fw.write("##Fin Resultats##");
+			fw.write("##End results##");
 			fw.close();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -227,7 +227,7 @@ public class Menu extends JFrame implements ActionListener, ListSelectionListene
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == lancer) {
 			if (scrutinsSelect.isSelectionEmpty()) {
-				JOptionPane.showMessageDialog(this.getParent(), "Veuillez choisir un ou plusieur scrutins", "Message d'erreur",
+				JOptionPane.showMessageDialog(this.getParent(), "Please choose at least one scrutin", "Error message",
 						JOptionPane.ERROR_MESSAGE);
 			} else {
 				List<File> listeResultats = new ArrayList<File>();
@@ -256,7 +256,7 @@ public class Menu extends JFrame implements ActionListener, ListSelectionListene
 		if (e.getSource() == choixFichier) {
 			JFileChooser fc1 = new JFileChooser();
 			fc1.setMultiSelectionEnabled(true);
-			fc1.setCurrentDirectory(new File("Fichiers"));
+			fc1.setCurrentDirectory(new File("File"));
 			int returnVal1 = fc1.showOpenDialog(this);
 			if (returnVal1 == JFileChooser.APPROVE_OPTION) {
 				situations = new ArrayList<File>();

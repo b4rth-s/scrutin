@@ -1,0 +1,42 @@
+##RESULTS ON##
+Situation 0 
+
+CARACTERISTICS
+
+##Number of candidates##
+5
+
+##Number of voters##
+10000
+
+##Situation file##
+/Users/barth/Documents/Mines 2A/Info/eclipse/Scrutin final/Fichiers/Situation 0 .stn
+
+##Satisfaction function##
+Average Gap
+
+##Scrutins##
+Election by elimination with 1 round;0.60346
+Election by elimination with 2 rounds;0.60346
+Election by elimination;0.6012
+
+##Results##
+**Election by elimination with 1 round**
+2011;
+1961;
+2021;
+2035;
+1972;
+**Election by elimination with 2 rounds**
+2011;0;
+1961;0;
+2021;4997;
+2035;5003;
+1972;0;
+**Election by elimination**
+2011;2514;3338;5008;
+1961;0;0;0;
+2021;2489;0;0;
+2035;2504;3361;4992;
+1972;2493;3301;0;
+##End results##

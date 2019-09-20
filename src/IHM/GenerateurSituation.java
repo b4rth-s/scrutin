@@ -45,11 +45,11 @@ public class GenerateurSituation extends JDialog implements ActionListener {
 		// Initialisation des attributs
 		situations = new ArrayList<File>();
 		
-		lblNomFichier = new JLabel("Nom du Fichier : ");
-		lblNbSituation= new JLabel("Nombre de situations :");
-		lblContraintes = new JLabel("Contraintes :");
-		lblVotants= new JLabel("Nombre d'électeurs");
-		lblCandidats= new JLabel("Nombre de candidats");
+		lblNomFichier = new JLabel("File name: ");
+		lblNbSituation= new JLabel("Number of situations:");
+		lblContraintes = new JLabel("Constraintes:");
+		lblVotants= new JLabel("Number of voters");
+		lblCandidats= new JLabel("Number of candidates");
 		
 		txtNomFichier = new JTextField();
 		txtNbSituation =new JTextField();
@@ -57,7 +57,7 @@ public class GenerateurSituation extends JDialog implements ActionListener {
 		txtNbCandidats=new JTextField();
 
 		ok = new JButton("OK");
-		annuler = new JButton("Annuler");
+		annuler = new JButton("Cancel");
 		
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new GridLayout(2, 2));
@@ -121,23 +121,23 @@ public class GenerateurSituation extends JDialog implements ActionListener {
 		Date maintenant = new Date();
 		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat heure = new SimpleDateFormat("H:mm:ss");
-		fw.write("##Nom##" + "\n" + nom + "\n\n" 
+		fw.write("##Name##" + "\n" + nom + "\n\n" 
 				+ "##Date##" + "\n" + date.format(maintenant) + "\n\n"
-				+ "##Heure##" + "\n" + heure.format(maintenant) + "\n\n"
-				+ "CARACTERISTIQUE" + "\n\n"
-				+ "##Nombre de votants##" + "\n" + contrainte.getNombreElecteurs() + "\n\n"
-				+ "##Nombre de candidats##" + "\n" + contrainte.getNombreCandidats() + "\n\n"
-				+ "##Noms des candidats##" + "\n");
+				+ "##Time##" + "\n" + heure.format(maintenant) + "\n\n"
+				+ "CARACTERISTICS" + "\n\n"
+				+ "##Number of voters##" + "\n" + contrainte.getNombreElecteurs() + "\n\n"
+				+ "##Number of candidates##" + "\n" + contrainte.getNombreCandidats() + "\n\n"
+				+ "##Candidates' names##" + "\n");
 		for(Candidat c:candidats) {
 			fw.write(c.getNom()+";");
 		}
-		fw.write("\n\n"+ "##CHOIX##"+"\n");
+		fw.write("\n\n"+ "##RANKINGS##"+"\n");
 		for(Electeur e:corpsElectoral) {
 			Candidat[] listeCandidats = e.getListeDeCandidats();
 			for(Candidat c:listeCandidats) {
 				fw.write(c.getNom().replaceAll("Candidat", "") + ";");
 			}
-			fw.write("1\n");
+			fw.write("\n");
 		}
 		fw.close();
 		return new File("Fichiers/"+nom+".stn");

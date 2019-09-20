@@ -3,14 +3,14 @@ package Entites;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Scrutin1 extends Scrutin {
+public class ByMajority1Round extends Scrutin {
     		//C'est la première application du Scrutin, le Scrutin a 1 tour. Cette classe est très utilisée même dans les autres types de Scrutins car elle organise les candidats selon le nombre de voix.
 	//ATTRIBUT(S)
 	
 	
 	//CONSTRUCTEUR(S)
-	public Scrutin1() {
-		this.setNom("Scrutin majoritaire à 1 tour");
+	public ByMajority1Round() {
+		this.setNom("Election by elimination with 1 round");
 	}
 	
 	
@@ -42,7 +42,7 @@ public class Scrutin1 extends Scrutin {
 			
 		}
 		
-		return new ResultatScrutin1(listeDeCandidats, listeDeResultatsNonNormalises);
+		return new ResultatByMajority1Round(listeDeCandidats, listeDeResultatsNonNormalises);
 	}
 	
 	private int getIndexOfCandidat(Candidat[] listeDeCandidats, Candidat candidat) {

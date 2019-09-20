@@ -2,13 +2,13 @@ package Entites;
 
 import java.util.List;
 
-public class ResultatScrutin3 extends Resultat {
+public class ResultatByElimination extends Resultat {
 			//Cette classe s'appuie en partie sur ResultatsScrutin1 pour donner le vainqueur du Scrutin3.
     //ATTRIBUT(S)
 
 	
     //CONSTRUCTEUR(S)
-    public ResultatScrutin3(Candidat[] listeDeCandidats, List<List<Integer>> listeDeResultats) {
+    public ResultatByElimination(Candidat[] listeDeCandidats, List<List<Integer>> listeDeResultats) {
     	this.setListeDeCandidats(listeDeCandidats);
     	this.setListeDeResultats(listeDeResultats);
     }

@@ -58,7 +58,7 @@ public class Situation {
 	}
     
 	public String toString() {
-		return this.name + "\nCandidats :\n" + Arrays.toString(this.getListeDeCandidats()) + "\n\nCorps électoral :\n" + Arrays.toString(this.getCorpsElectoral());
+		return this.name + "\nCandidat :\n" + Arrays.toString(this.getListeDeCandidats()) + "\n\nCorps électoral :\n" + Arrays.toString(this.getCorpsElectoral());
 	}
 	
 	public void setAdresse(String a) {

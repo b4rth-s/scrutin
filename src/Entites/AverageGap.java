@@ -1,6 +1,6 @@
 package Entites;
 
-public class PremiereFonctionDeSatisfaction extends FonctionSatisfaction {
+public class AverageGap extends FonctionSatisfaction {
 		//Cette première fonction de satisfaction est basique : elle regarde le malheur d'un électeur en mesurant l'écart entre le candidat élu et le candidat préféré. Elle fait ensuite la moyenne de cet écart et renvoie 1-moyenne.
 		//Cela permet donc d'avoir des valeurs entre 0 et 1. 1 si tous les électeurs sont satisfaits, 0 si tout le monde l'avait en dernier voeu.
 	
@@ -8,8 +8,8 @@ public class PremiereFonctionDeSatisfaction extends FonctionSatisfaction {
 
     
     //CONSTRUCTEUR(S)
-	public PremiereFonctionDeSatisfaction() {
-		this.setNom("Moyenne de l'écart entre le vœu et le candidat élu");
+	public AverageGap() {
+		this.setNom("Average Gap");
 	}
     
     
