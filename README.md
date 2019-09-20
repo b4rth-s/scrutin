@@ -6,14 +6,14 @@
 <p>In order to evaluate a "scrutin" (which is the goal of this program), we need to define a way of ranking them. We do that by defining a "satisfaction function". The first one we have programmed is an average of the gap.</p>
 <p>After the election, there are results, represented in the .rslt files. These files sum up the caracteristics of the situation, the "scrutin" and the satisfaction function. It then give the results in various format types depending on the "scrutin". Many results for different "scrutins" with the same situation can be on the same .rslt file.</p>
 <div align="center">
-	<img src="Captures/Capture1.png" alt="Capture1"
+	<img src="Captures/Capture 1.png" alt="Capture1"
 	title="Capture1" width="400" />
-	<img src="Captures/Capture2.png" alt="Capture2"
+	<img src="Captures/Capture 2.png" alt="Capture2"
 	title="Capture2" width="400" />
 </div>
 <div align="center">
-	<img src="Captures/Capture3.png" alt="Capture3"
+	<img src="Captures/Capture 3.png" alt="Capture3"
 	title="Capture3" width="400" />
-	<img src="Captures/Capture4.png" alt="Capture4"
+	<img src="Captures/Capture 4.png" alt="Capture4"
 	title="Capture4" width="400" />
 </div>
